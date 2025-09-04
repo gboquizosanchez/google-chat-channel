@@ -1,0 +1,62 @@
+{
+  "name": "gboquizosanchez/google-chat-channel",
+  "description": "Laravel package to send logs to Google Chat",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "laravel",
+    "google-chat",
+    "logging"
+  ],
+  "homepage": "https://github.com/gboquizosanchez",
+  "authors": [
+    {
+      "name": "Germán Boquizo Sánchez",
+      "email": "germanboquizosanchez@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Boquizo\\GoogleChatChannel\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.3|^8.4",
+    "illuminate/support": "^10.0|^11.0|^12.0",
+    "monolog/monolog": "^3.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.64",
+    "hermes/dependencies": "^1.1",
+    "larastan/larastan": "^2.9",
+    "orchestra/testbench": "^9.1",
+    "pestphp/pest": "^3.5"
+  },
+  "scripts": {
+    "fix": "./vendor/bin/php-cs-fixer fix",
+    "static": "./vendor/bin/phpstan analyse",
+    "all": [
+      "@fix",
+      "@static"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Boquizo\\GoogleChatChannel\\GoogleChatChannelServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
