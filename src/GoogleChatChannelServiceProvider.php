@@ -12,7 +12,7 @@ use Boquizo\GoogleChatChannel\Services\CriticalLogLevelValidator;
 use Boquizo\GoogleChatChannel\Services\ExceptionFormatterService;
 use Boquizo\GoogleChatChannel\Services\FilamentIntegrationService;
 use Boquizo\GoogleChatChannel\Services\GoogleChatMessageFormatter;
-use Illuminate\Support\Facades\App;
+use Illuminate\Foundation\Application as App;
 use Illuminate\Support\ServiceProvider;
 use Override;
 
@@ -54,7 +54,7 @@ final class GoogleChatChannelServiceProvider extends ServiceProvider
         $configFile = 'google-chat-channel.php';
 
         $this->publishes([
-            __DIR__ .'/../config/'.$configFile.'' => config_path($configFile),
+            __DIR__ . "/../config/{$configFile}" => config_path($configFile),
         ], 'config');
     }
 }

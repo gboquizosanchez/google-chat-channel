@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Boquizo\GoogleChatChannel\Services;
 
 use Boquizo\GoogleChatChannel\Contracts\MessageSenderInterface;
-use Boquizo\GoogleChatChannel\SendGoogleChatNotification;
+use Boquizo\GoogleChatChannel\Jobs\SendGoogleChatNotification;
 use Exception;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;

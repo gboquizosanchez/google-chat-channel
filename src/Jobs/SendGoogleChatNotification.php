@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Boquizo\GoogleChatChannel;
+namespace Boquizo\GoogleChatChannel\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
