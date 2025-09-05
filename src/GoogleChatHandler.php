@@ -4,28 +4,27 @@ declare(strict_types=1);
 
 namespace Boquizo\GoogleChatChannel;
 
+use Boquizo\GoogleChatChannel\Concerns\ResolvesLogSender;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Level;
 use Monolog\LogRecord;
 use Override;
 
-class GoogleChatLogger extends AbstractProcessingHandler
+final class GoogleChatHandler extends AbstractProcessingHandler
 {
-    protected GoogleChatSender $sender;
+    use ResolvesLogSender;
 
     public function __construct(
-        string $url,
+        private readonly string $url,
         string|int|Level $level = Level::Error,
         bool $bubble = true,
     ) {
-        $this->sender = new GoogleChatSender($url);
-
         parent::__construct($level, $bubble);
     }
 
     #[Override]
     protected function write(LogRecord $record): void
     {
-        $this->sender->send($record);
+        $this->resolveLogSender($this->url)->send($record);
     }
 }

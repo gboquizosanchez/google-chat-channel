@@ -25,7 +25,7 @@ return [
     */
 
     'driver' => 'custom',
-    'via' => \Boquizo\GoogleChatChannel\GoogleChatFactory::class,
+    'via' => \Boquizo\GoogleChatChannel\GoogleChatDriver::class,
 
 
     /*

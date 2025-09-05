@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
 
-class SendGoogleChatNotification implements ShouldQueue
+final class SendGoogleChatNotification implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

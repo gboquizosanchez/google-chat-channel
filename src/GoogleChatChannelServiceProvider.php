@@ -4,46 +4,57 @@ declare(strict_types=1);
 
 namespace Boquizo\GoogleChatChannel;
 
-use Illuminate\Config\Repository;
-use Illuminate\Foundation\Application;
+use Boquizo\GoogleChatChannel\Contracts\LogSenderFactoryInterface;
+use Boquizo\GoogleChatChannel\Factories\LogSenderFactory;
+use Boquizo\GoogleChatChannel\Services\ConfigurationService;
+use Boquizo\GoogleChatChannel\Services\ContextFormatterService;
+use Boquizo\GoogleChatChannel\Services\CriticalLogLevelValidator;
+use Boquizo\GoogleChatChannel\Services\ExceptionFormatterService;
+use Boquizo\GoogleChatChannel\Services\FilamentIntegrationService;
+use Boquizo\GoogleChatChannel\Services\GoogleChatMessageFormatter;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Override;
 
-class GoogleChatChannelServiceProvider extends ServiceProvider
+final class GoogleChatChannelServiceProvider extends ServiceProvider
 {
     #[Override]
     public function register(): void
     {
+        $this->app->singleton(ConfigurationService::class);
+        $this->app->singleton(CriticalLogLevelValidator::class);
+
+        $this->app->bind(
+            GoogleChatMessageFormatter::class,
+            function (App $app): GoogleChatMessageFormatter {
+                $config = $app->make(ConfigurationService::class);
+
+                return new GoogleChatMessageFormatter(
+                    $config,
+                    new ExceptionFormatterService($config),
+                    new ContextFormatterService($config),
+                    new FilamentIntegrationService($config),
+                );
+            },
+        );
+
+        $this->app->bind(
+            LogSenderFactoryInterface::class,
+            LogSenderFactory::class,
+        );
+
         $this->mergeConfigFrom(
-            __DIR__.'/../config/google-chat-channel.php',
+            __DIR__ . '/../config/google-chat-channel.php',
             'logging.channels.google_chat'
         );
     }
 
     public function boot(): void
     {
+        $configFile = 'google-chat-channel.php';
+
         $this->publishes([
-            __DIR__ . '/../config/google-chat-channel.php' => config_path('google-chat-channel.php'),
+            __DIR__ .'/../config/'.$configFile.'' => config_path($configFile),
         ], 'config');
-
-        if (version_compare(Application::VERSION, '11.0.0', '<')) {
-            $this->polyfills();
-        }
-    }
-
-    private function polyfills(): void
-    {
-        Repository::macro('string', function (string $key, mixed $default = null): string {
-            $value = $this->get($key, $default);
-
-            return (string) Str::of($value);
-        });
-
-        Repository::macro('boolean', function (string $key, bool $default = false): bool {
-            $value = $this->get($key, $default);
-
-            return is_bool($value) ? $value : (bool) $value;
-        });
     }
 }
