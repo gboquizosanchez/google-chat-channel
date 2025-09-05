@@ -1,7 +1,7 @@
 # Google Chat Channel for Laravel
 
 [![Latest Version](https://img.shields.io/packagist/v/gboquizosanchez/google-chat-channel.svg)](https://packagist.org/packages/gboquizosanchez/google-chat-channel)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
+[![Software License](https://img.shields.io/badge/license-MIT-red.svg)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/gboquizosanchez/google-chat-channel.svg)](https://packagist.org/packages/gboquizosanchez/google-chat-logger-channel)
 
 A powerful and lightweight Laravel logging channel that sends logs directly to Google Chat spaces via webhooks. Perfect for monitoring your application's health and receiving instant notifications about errors, exceptions, and important events.
