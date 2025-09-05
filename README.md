@@ -1,4 +1,4 @@
-# Google Chat Logger Channel for Laravel
+# Google Chat Channel for Laravel
 
 [![Latest Version](https://img.shields.io/packagist/v/gboquizosanchez/google-chat-channel.svg)](https://packagist.org/packages/gboquizosanchez/google-chat-channel)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
@@ -12,7 +12,7 @@ A powerful and lightweight Laravel logging channel that sends logs directly to G
 - 📱 Rich formatting with cards and emojis based on log level
 - ⚙️ Flexible configuration via environment variables
 - 🔧 Support for context and exception details
-- 🎯 Compatible with Laravel 10, 11, and 12
+- 🎯 Compatible with Laravel 11, and 12
 - 📊 Smart error handling and retries
 
 ## 📦 Installation
